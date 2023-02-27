@@ -35,25 +35,28 @@ function App() {
         
       </Header>
       <Layout>
-        
         <Content>
           <div>
             <Row>
               <Col span={8}>
-              <Button type="primary" danger>
-              Primary
-            </Button>
-            <Switch
+                <Button type="primary" danger>
+                  Primary
+                </Button>
+                <Switch
                   checkedChildren="david is sleepy"
                   unCheckedChildren="david is not sleepy"
                   loading={load}
                 />
-            <Form.Item
-              label="Today(this morning)david is sleepy or not"
-              valuePropName="checked"
-            >
-              <Switch />
-            </Form.Item>
+                <Card title="Card" size="small">
+                  <p>Card content</p>
+                  <p>Card content</p>
+                </Card>
+                <Form.Item
+                  label="Today(this morning)david is sleepy or not"
+                  valuePropName="checked"
+                >
+                  <Switch />
+                </Form.Item>
               </Col>
               <Col span={8}>
                 <Card
@@ -68,33 +71,36 @@ function App() {
                 >
                   <Meta title="Lakers" description="china.nba.com/lakers" />
                 </Card>
-                <QRCode value="https://china.nba.com/lakers" />
+                <Card title="Lakers" size="small">
+                  <p>Let's join LA Lakers!!!</p>
+                  <QRCode value="https://china.nba.com/lakers" />
+                </Card>
+                
                 <Space direction="vertical">
-              <DatePicker onChange={onchange} />
-              <DatePicker onChange={onchange} picker="week" />
-              <DatePicker onChange={onchange} picker="month" />
-              <DatePicker onChange={onchange} picker="quarter" />
-              <DatePicker onChange={onchange} picker="year" />
-            </Space>
+                  <DatePicker onChange={onchange} />
+                  <DatePicker onChange={onchange} picker="week" />
+                  <DatePicker onChange={onchange} picker="month" />
+                  <DatePicker onChange={onchange} picker="quarter" />
+                  <DatePicker onChange={onchange} picker="year" />
+                </Space>
               </Col>
               <Col span={8}>
-              <Space wrap>
-              
-              <QRCode
-                value="https://ant.design/"
-                status="expired"
-                onRefresh={() => console.log("refresh")}
-              />
-            </Space>
+                <Space wrap>
+                  <QRCode
+                    value="https://ant.design/"
+                    status="expired"
+                    onRefresh={() => console.log("refresh")}
+                  />
+                </Space>
               </Col>
             </Row>
-            
+
             <Upload action="/upload.do" listType="picture-card">
               <div>
                 <div style={{ marginTop: 8 }}>Upload</div>
               </div>
             </Upload>
-            
+
             <Space direction="vertical">
               <Switch
                 checkedChildren="开启"
@@ -109,9 +115,6 @@ function App() {
               <Switch unCheckedChildren={<CloseOutlined />} defaultChecked />
               <FrownOutlined />
             </Space>
-            
-
-            
           </div>
         </Content>
       </Layout>
