@@ -1,8 +1,15 @@
-import { FrownOutlined, MehOutlined, SmileOutlined } from "@ant-design/icons";
+import {
+  FrownOutlined,
+  MailOutlined,
+  MehOutlined,
+  SmileOutlined,
+} from "@ant-design/icons";
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
 import { MenuUnfoldOutlined, CloseOutlined } from "@ant-design/icons";
+import type { MenuProps } from "antd";
+
 import {
   Layout,
   Menu,
@@ -28,11 +35,34 @@ function App() {
     console.log(date, dateString);
     return dateString;
   };
+
+  const items: MenuProps["items"] = [
+    {
+      label: "Navigation One",
+      key: "mail",
+      icon: <MailOutlined />,
+      children: [
+        {
+          type: "group",
+          label: "Item 1",
+          children: [
+            {
+              label: "Option 1",
+              key: "setting:1",
+            },
+            {
+              label: "Option 2",
+              key: "setting:2",
+            },
+          ],
+        },
+      ],
+    },
+  ];
   return (
     <Layout style={{ height: "100vh" }}>
       <Header style={{ background: "white" }}>
         <div className="logo" />
-        
       </Header>
       <Layout>
         <Content>
@@ -75,7 +105,11 @@ function App() {
                   <p>Let's join LA Lakers!!!</p>
                   <QRCode value="https://china.nba.com/lakers" />
                 </Card>
-                
+                <Menu
+                  onClick={() => console.log("dummy")}
+                  mode="horizontal"
+                  items={items}
+                />
                 <Space direction="vertical">
                   <DatePicker onChange={onchange} />
                   <DatePicker onChange={onchange} picker="week" />
