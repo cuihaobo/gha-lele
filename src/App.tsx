@@ -9,7 +9,8 @@ import reactLogo from "./assets/react.svg";
 import "./App.css";
 import { MenuUnfoldOutlined, CloseOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-
+import dayjs from "dayjs";
+import { QRMaker } from "./QRMaker";
 import {
   Layout,
   Menu,
@@ -33,7 +34,7 @@ function App() {
   const [load, setLoad] = useState(false);
   const onChange: DatePickerProps["onChange"] = (date, dateString) => {
     console.log(date, dateString);
-    return dateString;
+    return dayjs("2022-06-30");
   };
 
   const items: MenuProps["items"] = [
@@ -77,6 +78,7 @@ function App() {
                   unCheckedChildren="david is not sleepy"
                   loading={load}
                 />
+                <QRMaker />
                 <Card title="Card" size="small">
                   <p>Card content</p>
                   <p>Card content</p>
@@ -111,11 +113,11 @@ function App() {
                   items={items}
                 />
                 <Space direction="vertical">
-                  <DatePicker onChange={onchange} />
-                  <DatePicker onChange={onchange} picker="week" />
-                  <DatePicker onChange={onchange} picker="month" />
-                  <DatePicker onChange={onchange} picker="quarter" />
-                  <DatePicker onChange={onchange} picker="year" />
+                  <DatePicker />
+                  <DatePicker picker="week" />
+                  <DatePicker picker="month" />
+                  <DatePicker picker="quarter" />
+                  <DatePicker picker="year" />
                 </Space>
               </Col>
               <Col span={8}>
