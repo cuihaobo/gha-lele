@@ -1,67 +1,19 @@
-import { AppstoreOutlined, FrownOutlined, MailOutlined, MehOutlined, SettingOutlined, SmileOutlined } from "@ant-design/icons";
+import {
+  ClockCircleOutlined,
+  FrownOutlined,
+  LikeOutlined,
+  MailOutlined,
+  MehOutlined,
+  SmileOutlined,
+} from "@ant-design/icons";
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
-import type { MenuProps } from 'antd';
-const items: MenuProps["items"] = [
-  {
-    label: "Navigation One",
-    key: "mail",
-    icon: <MailOutlined />,
-  },
-  {
-    label: "Navigation Two",
-    key: "app",
-    icon: <AppstoreOutlined />,
-    disabled: true,
-  },
-  {
-    label: "Navigation Three - Submenu",
-    key: "SubMenu",
-    icon: <SettingOutlined />,
-    children: [
-      {
-        type: "group",
-        label: "Item 1",
-        children: [
-          {
-            label: "Option 1",
-            key: "setting:1",
-          },
-          {
-            label: "Option 2",
-            key: "setting:2",
-          },
-        ],
-      },
-      {
-        type: "group",
-        label: "Item 2",
-        children: [
-          {
-            label: "Option 3",
-            key: "setting:3",
-          },
-          {
-            label: "Option 4",
-            key: "setting:4",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    label: (
-      <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
-        Navigation Four - Link
-      </a>
-    ),
-    key: "alipay",
-  },
-];
-
-
 import { MenuUnfoldOutlined, CloseOutlined } from "@ant-design/icons";
+import { MenuProps, Statistic, Timeline } from "antd";
+import dayjs from "dayjs";
+import { QRMaker } from "./QRMaker";
+import {router} from "./routes"
 import {
   Layout,
   Menu,
@@ -78,6 +30,7 @@ import {
   Col,
 } from "antd";
 import Meta from "antd/es/card/Meta";
+import { RouterProvider } from 'react-router-dom'
 const { Content, Header, Sider } = Layout;
 function App() {
   const [count, setCount] = useState(0);
@@ -85,16 +38,40 @@ function App() {
   const [load, setLoad] = useState(false);
   const onChange: DatePickerProps["onChange"] = (date, dateString) => {
     console.log(date, dateString);
-    return dateString;
+    return dayjs("2022-06-30");
   };
+
+  const items: MenuProps["items"] = [
+    {
+      label: "Navigation One",
+      key: "mail",
+      icon: <MailOutlined />,
+      children: [
+        {
+          type: "group",
+          label: "Item 1",
+          children: [
+            {
+              label: "Option 1",
+              key: "setting:1",
+            },
+            {
+              label: "Option 2",
+              key: "setting:2",
+            },
+          ],
+        },
+      ],
+    },
+  ];
   return (
     <Layout style={{ height: "100vh" }}>
       <Header style={{ background: "white" }}>
         <div className="logo" />
-        
       </Header>
       <Layout>
         <Content>
+        <RouterProvider router={router} />
           <div>
             <Row>
               <Col span={8}>
@@ -106,6 +83,7 @@ function App() {
                   unCheckedChildren="david is not sleepy"
                   loading={load}
                 />
+                <QRMaker />
                 <Card title="Card" size="small">
                   <p>Card content</p>
                   <p>Card content</p>
@@ -132,24 +110,14 @@ function App() {
                 </Card>
                 <Card title="Lakers" size="small">
                   <p>Let's join LA Lakers!!!</p>
-                  <img
-                      alt="example"
-                      src="https://pics0.baidu.com/feed/314e251f95cad1c81c150613aa253d0fc93d517e.jpeg"
-                    />
                   <QRCode value="https://china.nba.com/lakers" />
                 </Card>
-                <Menu 
-                    onClick={() => console.log("dummy")}
-                    mode="horizontal"
-                    items={(items)}
+                
+                <Menu
+                  onClick={() => console.log("dummy")}
+                  mode="horizontal"
+                  items={items}
                 />
-                <Space direction="vertical">
-                  <DatePicker onChange={onchange} />
-                  <DatePicker onChange={onchange} picker="week" />
-                  <DatePicker onChange={onchange} picker="month" />
-                  <DatePicker onChange={onchange} picker="quarter" />
-                  <DatePicker onChange={onchange} picker="year" />
-                </Space>
               </Col>
               <Col span={8}>
                 <Space wrap>
@@ -159,6 +127,33 @@ function App() {
                     onRefresh={() => console.log("refresh")}
                   />
                 </Space>
+                <Row gutter={16}>
+                  <Col span={12}>
+                    <Statistic
+                      title="Feedback"
+                      value={1128}
+                      prefix={<LikeOutlined />}
+                    />
+                  </Col>
+                  <Col span={12}>
+                    <Statistic title="Unmerged" value={0} suffix="/ 100" />
+                  </Col>
+                </Row>
+                <Timeline
+    items={[
+      {
+        children: 'David works very hard every day',
+      },
+      {
+        children: 'He only slept for about 4hours yesterday',
+      },
+      {
+        dot: <ClockCircleOutlined className="timeline-clock-icon" />,
+        color: 'red',
+        children: 'So now he is very sleepy ',
+      },
+    ]}
+  />
               </Col>
             </Row>
 
