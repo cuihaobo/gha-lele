@@ -7,7 +7,7 @@ import {
   SmileOutlined,
 } from "@ant-design/icons";
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
+import reactLogo from "./assets/react.svg"
 import "./App.css";
 import { MenuUnfoldOutlined, CloseOutlined } from "@ant-design/icons";
 import { MenuProps, Statistic, Timeline } from "antd";
@@ -118,6 +118,13 @@ function App() {
                   mode="horizontal"
                   items={items}
                 />
+                <Space direction="vertical">
+                  <DatePicker />
+                  <DatePicker picker="week" />
+                  <DatePicker picker="month" />
+                  <DatePicker picker="quarter" />
+                  <DatePicker picker="year" />
+                </Space>
               </Col>
               <Col span={8}>
                 <Space wrap>

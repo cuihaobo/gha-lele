@@ -1,6 +1,6 @@
 import { Card, Col, Row } from "antd";
 import QRCode from "antd/es/qrcode";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 export const QRMaker = () => {
   const [qrCode, setQrSode] = useState<string | undefined>();
@@ -18,7 +18,7 @@ export const QRMaker = () => {
       <Row>
         <Col>
           <input
-            onChange={(e: any) => handleInputChange(e)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => handleInputChange(e)}
             className="mt4"
             type="text"
           />
