@@ -13,7 +13,8 @@ import { MenuUnfoldOutlined, CloseOutlined } from "@ant-design/icons";
 import { MenuProps, Statistic, Timeline } from "antd";
 import dayjs from "dayjs";
 import { QRMaker } from "./QRMaker";
-import {router} from "./routes"
+import { router } from "./routes";
+import { Router, Routes } from "react-router-dom";
 import {
   Layout,
   Menu,
@@ -34,7 +35,9 @@ import { RouterProvider } from 'react-router-dom'
 const { Content, Header, Sider } = Layout;
 function App() {
   const [count, setCount] = useState(0);
-  const [collapsed, setCollapsed] = useState(false);
+  const [isOn, setIsOn] = useState(false);//IsOn:reading(true,false) setIsOn:changing
+  const [collapsed, setCollapsed] = useState(true);
+  const [show,setshow] = useState(false);
   const [load, setLoad] = useState(false);
   const onChange: DatePickerProps["onChange"] = (date, dateString) => {
     console.log(date, dateString);
@@ -71,17 +74,34 @@ function App() {
       </Header>
       <Layout>
         <Content>
-        <RouterProvider router={router} />
+          <RouterProvider router={router} />
           <div>
             <Row>
               <Col span={8}>
-                <Button type="primary" danger>
+                <Button type="primary" danger onClick={()=>{
+                  console.log("helloworld");
+                  setCollapsed(!collapsed);
+                  console.log(collapsed);
+                }}>
+                  
                   Primary
                 </Button>
+                <Button 
+                  type="primary"
+                  danger
+                  onClick ={() => {
+                  setshow(!show);
+                  console.log(show)
+                  }}
+                  >Primary Button</Button>
                 <Switch
                   checkedChildren="david is sleepy"
                   unCheckedChildren="david is not sleepy"
                   loading={load}
+                  onChange={(x: any) => {
+                    console.log({ x });
+                    setIsOn(x);
+                  }}
                 />
                 <QRMaker />
                 <Card title="Card" size="small">
@@ -96,9 +116,9 @@ function App() {
                 </Form.Item>
               </Col>
               <Col span={8}>
-                <Card
+                {collapsed && <Card
                   hoverable
-                  style={{ width: 240 }}
+                  style={{ width: 240 }}  
                   cover={
                     <img
                       alt="example"
@@ -107,32 +127,36 @@ function App() {
                   }
                 >
                   <Meta title="Lakers" description="china.nba.com/lakers" />
-                </Card>
-                <Card title="Lakers" size="small">
-                  <p>Let's join LA Lakers!!!</p>
-                  <QRCode value="https://china.nba.com/lakers" />
-                </Card>
-                
+                </Card>}
+                {!isOn && (
+                  <Card title="Lakers" size="small">
+                    <p>Let's join LA Lakers!!!</p>
+                    <QRCode value="https://china.nba.com/lakers" />
+                  </Card>
+                )}
+
                 <Menu
                   onClick={() => console.log("dummy")}
                   mode="horizontal"
                   items={items}
                 />
-                <Space direction="vertical">
+                {show &&(<Space direction="vertical">
                   <DatePicker />
                   <DatePicker picker="week" />
                   <DatePicker picker="month" />
                   <DatePicker picker="quarter" />
                   <DatePicker picker="year" />
-                </Space>
+                </Space>)}
               </Col>
               <Col span={8}>
                 <Space wrap>
-                  <QRCode
-                    value="https://ant.design/"
-                    status="expired"
-                    onRefresh={() => console.log("refresh")}
-                  />
+                  {isOn && (
+                    <QRCode
+                      value="https://ant.design/"
+                      status="expired"
+                      onRefresh={() => console.log("refresh")}
+                    />
+                  )}
                 </Space>
                 <Row gutter={16}>
                   <Col span={12}>
@@ -147,20 +171,22 @@ function App() {
                   </Col>
                 </Row>
                 <Timeline
-    items={[
-      {
-        children: 'David works very hard every day',
-      },
-      {
-        children: 'He only slept for about 4hours yesterday',
-      },
-      {
-        dot: <ClockCircleOutlined className="timeline-clock-icon" />,
-        color: 'red',
-        children: 'So now he is very sleepy ',
-      },
-    ]}
-  />
+                  items={[
+                    {
+                      children: "David works very hard every day",
+                    },
+                    {
+                      children: "He only slept for about 4hours yesterday",
+                    },
+                    {
+                      dot: (
+                        <ClockCircleOutlined className="timeline-clock-icon" />
+                      ),
+                      color: "red",
+                      children: "So now he is very sleepy ",
+                    },
+                  ]}
+                />
               </Col>
             </Row>
 
