@@ -2,7 +2,7 @@ import React from 'react';
 import 'antd/dist/reset.css';
 import './App.css';
 import {Route, Routes} from 'react-router-dom';
-import { Home1 } from './components/Home1';
+import { Home1 } from './components/Login';
 import { Home2 } from './components/Home2';
 import { Home3 } from './components/Home3';
 import { Home } from './components/Home';
