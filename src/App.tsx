@@ -1,36 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
-import { MenuUnfoldOutlined, CloseOutlined } from "@ant-design/icons";
-import { Layout, Menu } from 'antd'
-const { Content, Header, Sider } = Layout
-function App() {
-  const [count, setCount] = useState(0)
-  const [collapsed, setCollapsed] = useState(false)
+import React from 'react';
+import 'antd/dist/reset.css';
+import './App.css';
+import {Route, Routes} from 'react-router-dom';
+import { Home1 } from './components/Login';
+import { Home2 } from './components/Home2';
+import { Home3 } from './components/Home3';
+import { Home } from './components/Home';
+import { Navigation } from './components/layout/Navigation';
 
+const App = () => {
   return (
-    <Layout style={{ height: '100vh'}}>
-      <Header style={{ background: "white" }}>
-      <div className="logo" />
-          {collapsed ? (
-            <MenuUnfoldOutlined onClick={() => setCollapsed(!collapsed)} />
-          ) : (
-            <CloseOutlined onClick={() => setCollapsed(!collapsed)} />
-          )}
-      </Header>
-      <Layout>
-        <Sider
-          trigger={null}
-          collapsible
-          collapsed={collapsed}
-        >
-          <Menu></Menu>
-        </Sider>
-        <Content>
-
-        </Content>
-      </Layout>
-    </Layout>
+    <div>
+      <Navigation />
+      <Routes>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/login' element={<Home1/>}/>
+        <Route path='/picture' element={<Home2/>}/>
+      </Routes>
+    </div>
   )
 }
 
