@@ -1,23 +1,19 @@
-import React from 'react';
-import 'antd/dist/reset.css';
-import './App.css';
-import {Route, Routes} from 'react-router-dom';
-import { Home1 } from './components/Login';
-import { Home2 } from './components/Home2';
-import { Home3 } from './components/Home3';
-import { Home } from './components/Home';
-import { Navigation } from './components/layout/Navigation';
+import { Layout, Menu } from 'antd'
+import { RouterMap } from './Router'
+import { NavigationMenu } from './components/NavigationMenu'
+const { Header, Content, Sider } = Layout
 
-const App = () => {
+function App() {
   return (
-    <div>
-      <Navigation />
-      <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/login' element={<Home1/>}/>
-        <Route path='/picture' element={<Home2/>}/>
-      </Routes>
-    </div>
+    <Layout style={{ height: '100vh' }}>
+      <NavigationMenu />
+      <Layout>
+        <Sider></Sider>
+        <Content>
+          <RouterMap />
+        </Content>
+      </Layout>
+    </Layout>
   )
 }
 
